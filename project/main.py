@@ -1,9 +1,9 @@
 import os
 import pandas as pd
-from models.naive_bayes import NB
-from models.BERT import BERT
-from models.Albert import Albert
-from models.xlnet import XLNET
+from project.models.naive_bayes import NB
+from project.models.BERT import BERT
+from project.models.Albert import Albert
+from project.models.xlnet import XLNET
 from os import path
 
 def initialize_df():
@@ -56,7 +56,7 @@ if __name__ == "__main__":
             {'epochs': 3, 'weight_decay': 0.01, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9}
         ]
         for p in parameters:
-            model = Albert(filename)
+            model = Albert(filename, p)
             a, t = model.pipeline()
             score.append(a)
             time.append(t)
@@ -66,7 +66,7 @@ if __name__ == "__main__":
             {'epochs': 3, 'weight_decay': 0.01, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9}
         ]
         for p in parameters:
-            model = XLNET(filename)
+            model = XLNET(filename, p)
             a, t = model.pipeline()
             score.append(a)
             time.append(t)

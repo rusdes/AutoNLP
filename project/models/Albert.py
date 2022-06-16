@@ -28,17 +28,19 @@ class Albert():
         }
 
     def pipeline(self):
-        batch_size = 1
+        batch_size = 32
 
 
         data = pd.read_csv(self.path)
+        data = data.iloc[:,-2:]
         
         if len(data) > 30000:
             data = data[:30000]
 
         data.rename(columns = {list(data)[0]:'content', list(data)[1]:'label'}, inplace=True)
 
-        print("len:", len(data))
+        data['content'] = data['content'].str.replace('\d+', '')
+        data.dropna(inplace=True)
 
         X_train, X_test = train_test_split(data, test_size=0.5, random_state=42)
 
@@ -47,12 +49,10 @@ class Albert():
         X_train.iloc[:,1] = le.transform(X_train.iloc[:,1])
         X_test.iloc[:,1] = le.transform(X_test.iloc[:,1])
 
-        print(X_train.head())
-
         model_name = "albert-base-v2"
 
         # max sequence length for each document/sentence sample
-        max_length = 4
+        max_length = 180
 
         tokenizer = AlbertTokenizerFast.from_pretrained(model_name)
 
@@ -73,16 +73,12 @@ class Albert():
             output_dir='./albert_results',          # output directory
             num_train_epochs=self.parameters['epochs'],              # total number of training epochs
             per_device_train_batch_size=batch_size,  # batch size per device during training
-            per_device_eval_batch_size=batch_size,   # batch size for evaluation
+            per_device_eval_batch_size=batch_size*2,   # batch size for evaluation
             weight_decay=self.parameters['weight_decay'],
             learning_rate=self.parameters['learning_rate'],
             adam_beta1=self.parameters['adam_beta1'],
             adam_beta2=self.parameters['adam_beta2'],
-            load_best_model_at_end=True,     # load the best model when finished training (default metric is loss)
-            # but you can specify `metric_for_best_model` argument to change to accuracy or other metric
-            logging_steps=400,               # log & save weights each logging_steps
-            save_steps=400,
-            evaluation_strategy="steps",     # evaluate each `logging_steps`
+            do_eval=False,
         )
 
         trainer = Trainer(
