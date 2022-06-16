@@ -40,6 +40,8 @@ class NB():
         # Predicting our test data
         predicted = text_clf.predict(X_test)
         t = end - start
+        # debug
+        print('NB done')
         return np.mean(predicted == y_test)*100, t
 
 if __name__ == "__main__":

@@ -27,7 +27,7 @@ class BERT():
         }
 
     def pipeline(self):
-        batch_size = 2
+        batch_size = 8
 
 
         data = pd.read_csv(self.path)
@@ -49,7 +49,7 @@ class BERT():
         model_name = "bert-base-uncased"
 
         # max sequence length for each document/sentence sample
-        max_length = 64
+        max_length = 4
 
         tokenizer = BertTokenizerFast.from_pretrained(model_name)
 
@@ -98,6 +98,10 @@ class BERT():
         res = metric.compute(predictions=preds, references=predictions.label_ids)
 
         end = time.time()
+
+        # debug
+        print('bert done')
+
         return res, end - begin
 
 if __name__ == "__main__":

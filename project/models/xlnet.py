@@ -27,7 +27,7 @@ class XLNET():
         }
 
     def pipeline(self):
-        batch_size = 2
+        batch_size = 1
 
 
         data = pd.read_csv(self.path)
@@ -44,12 +44,10 @@ class XLNET():
         X_train.iloc[:,1] = le.transform(X_train.iloc[:,1])
         X_test.iloc[:,1] = le.transform(X_test.iloc[:,1])
 
-        print(X_train.head())
-
         model_name = "xlnet-base-cased"
 
         # max sequence length for each document/sentence sample
-        max_length = 64
+        max_length = 4
 
         tokenizer = XLNetTokenizerFast.from_pretrained(model_name)
 
@@ -98,6 +96,9 @@ class XLNET():
         res = metric.compute(predictions=preds, references=predictions.label_ids)
 
         end = time.time()
+
+        # debug
+        print('xlnet done')
         return res, end - begin
 
 if __name__ == "__main__":

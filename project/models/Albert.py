@@ -28,7 +28,7 @@ class Albert():
         }
 
     def pipeline(self):
-        batch_size = 2
+        batch_size = 1
 
 
         data = pd.read_csv(self.path)
@@ -52,7 +52,7 @@ class Albert():
         model_name = "albert-base-v2"
 
         # max sequence length for each document/sentence sample
-        max_length = 64
+        max_length = 4
 
         tokenizer = AlbertTokenizerFast.from_pretrained(model_name)
 
@@ -101,6 +101,9 @@ class Albert():
         preds = np.argmax(predictions.predictions, axis=-1)
         metric = load_metric("glue", "mrpc")
         res = metric.compute(predictions=preds, references=predictions.label_ids)
+
+        # debug
+        print('Albert done')
 
         return res, end - begin
 
