@@ -28,7 +28,7 @@ class Albert():
         }
 
     def pipeline(self):
-        batch_size = 32
+        batch_size = 64
 
 
         data = pd.read_csv(self.path)
@@ -52,7 +52,7 @@ class Albert():
         model_name = "albert-base-v2"
 
         # max sequence length for each document/sentence sample
-        max_length = 180
+        max_length = 150
 
         tokenizer = AlbertTokenizerFast.from_pretrained(model_name)
 

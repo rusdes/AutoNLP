@@ -27,7 +27,7 @@ class XLNET():
         }
 
     def pipeline(self):
-        batch_size = 32
+        batch_size = 64
 
         data = pd.read_csv(self.path)
         data = data.iloc[:,-2:]
@@ -50,7 +50,7 @@ class XLNET():
         model_name = "xlnet-base-cased"
 
         # max sequence length for each document/sentence sample
-        max_length = 180
+        max_length = 150
 
         tokenizer = XLNetTokenizerFast.from_pretrained(model_name)
 

@@ -5,6 +5,8 @@ from project.models.BERT import BERT
 from project.models.Albert import Albert
 from project.models.xlnet import XLNET
 from os import path
+import glob
+
 
 def initialize_df():
     if path.exists('accuracy.csv'):
@@ -29,9 +31,11 @@ def initialize_df():
 if __name__ == "__main__":
     scores, times = initialize_df()
 
-    datasets_dir = "datasets"
+    datasets_dir = "datasets/*.csv"
 
-    for filename in os.scandir(datasets_dir):
+    for filename in glob.glob(datasets_dir):
+        # if filename == '/content/datasets/IMDBDataset.csv'
+        print(filename)
         score = []
         time = []
         
