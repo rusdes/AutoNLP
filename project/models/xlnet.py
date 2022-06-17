@@ -32,8 +32,8 @@ class XLNET():
         data = pd.read_csv(self.path)
         data = data.iloc[:,-2:]
 
-        if len(data) > 30000:
-            data = data[:30000]
+        if len(data) > 20000:
+            data = data[:20000]
 
         data.rename(columns = {list(data)[0]:'content', list(data)[1]:'label'}, inplace=True)
 
