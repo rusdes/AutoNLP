@@ -1,9 +1,8 @@
-import os
 import pandas as pd
-from project.models.naive_bayes import NB
-from project.models.BERT import BERT
-from project.models.Albert import Albert
-from project.models.xlnet import XLNET
+from naive_bayes import NB
+from BERT import BERT
+from Albert import Albert
+from xlnet import XLNET
 from os import path
 import glob
 
@@ -34,7 +33,6 @@ if __name__ == "__main__":
     datasets_dir = "datasets/*.csv"
 
     for filename in glob.glob(datasets_dir):
-        # if filename == '/content/datasets/IMDBDataset.csv'
         print(filename)
         score = []
         time = []

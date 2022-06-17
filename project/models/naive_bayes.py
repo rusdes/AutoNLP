@@ -16,15 +16,13 @@ class NB():
         data = pd.read_csv(self.path)
         data = data.iloc[:,-2:]
 
-        if len(data) > 20000:
-            data = data[:20000]
+        if len(data) > 10000:
+            data = data[:10000]
 
         data.rename(columns = {list(data)[0]:'content', list(data)[1]:'label'}, inplace=True)
 
         data['content'] = data['content'].str.replace('\d+', '')
         data.dropna(inplace=True)
-
-        data.to_csv('imdb.csv')
 
         X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,0], data.iloc[:,1], test_size=0.2, random_state=42)
 
@@ -51,7 +49,7 @@ class NB():
         return np.mean(predicted == y_test)*100, t
 
 if __name__ == "__main__":
-    path = "//home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/IMDBDataset.csv"
+    path = "//home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/cyberbullying_tweets.csv"
     NB = NB(path)
     accuracy, time = NB.pipeline()
 
