@@ -98,7 +98,8 @@ class XLNET():
 
         # debug
         print('xlnet done')
-        return round(res['accuracy'],4), end - begin
+        t = end - begin
+        return float("{0:.4f}".format(res['accuracy'])), float("{0:.4f}".format(t))
 
 if __name__ == "__main__":
     path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/sarcasm.csv"

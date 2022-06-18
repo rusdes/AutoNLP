@@ -46,7 +46,7 @@ class NB():
         t = end - start
         # debug
         print('NB done')
-        return round(np.mean(predicted == y_test),4), t
+        return float("{0:.4f}".format(np.mean(predicted == y_test))), float("{0:.4f}".format(t))
 
 if __name__ == "__main__":
     path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/cyberbullying_tweets_1.csv"
