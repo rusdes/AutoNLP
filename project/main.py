@@ -83,7 +83,6 @@ if __name__ == "__main__":
         time_df = pd.DataFrame([time], columns = ["Dataset", "NB", "Bert_1", "Albert_1", "XLNet_1"])
         scores = scores.append(score_df, ignore_index = True)
         times = times.append(time_df, ignore_index = True)
-        print(scores.head())
 
     scores.to_csv('accuracy.csv', index=False)
     times.to_csv('training_time.csv', index=False)
