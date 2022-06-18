@@ -98,8 +98,7 @@ class BERT():
 
         # debug
         print('bert done')
-
-        return res.accuracy, end - begin
+        return round(res['accuracy'],4), end - begin
 
 if __name__ == "__main__":
     path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/sarcasm.csv"

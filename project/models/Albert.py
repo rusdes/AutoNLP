@@ -101,7 +101,7 @@ class Albert():
         # debug
         print('Albert done')
 
-        return res.accuracy, end - begin
+        return round(res['accuracy'],4), end - begin
 
 if __name__ == "__main__":
     path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/sarcasm.csv"

@@ -46,10 +46,10 @@ class NB():
         t = end - start
         # debug
         print('NB done')
-        return np.mean(predicted == y_test)*100, t
+        return round(np.mean(predicted == y_test),4), t
 
 if __name__ == "__main__":
-    path = "//home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/cyberbullying_tweets.csv"
+    path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/cyberbullying_tweets_1.csv"
     NB = NB(path)
     accuracy, time = NB.pipeline()
 
