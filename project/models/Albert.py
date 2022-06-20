@@ -74,7 +74,7 @@ class Albert():
             num_train_epochs=self.parameters['epochs'],              # total number of training epochs
             per_device_train_batch_size=batch_size,  # batch size per device during training
             per_device_eval_batch_size=batch_size*2,   # batch size for evaluation
-            weight_decay=self.parameters['weight_decay'],
+            warmup_steps=self.parameters['warmup_steps'],
             learning_rate=self.parameters['learning_rate'],
             adam_beta1=self.parameters['adam_beta1'],
             adam_beta2=self.parameters['adam_beta2'],

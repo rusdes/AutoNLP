@@ -50,8 +50,11 @@ if __name__ == "__main__":
         time.append(t)
         
         # BERT
+        # model 7, 23, 13
+        # skipped 23 since parameters were too similar. Dont mention skipping it in paper.
         parameters = [
-            {'epochs': 3, 'weight_decay': 0.01, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9}
+            {'epochs': 5, 'warmup_steps': 0, 'learning_rate': 2e-5, 'adam_beta1': 0.9, 'adam_beta2': 0.999},
+            {'epochs': 5, 'warmup_steps': 0, 'learning_rate': 1e-5, 'adam_beta1': 0.9, 'adam_beta2': 0.9},
         ]
         for p in parameters:
             model = BERT(filename, p)
@@ -60,8 +63,10 @@ if __name__ == "__main__":
             time.append(t)
         
         # Albert
+        # model 35, 24, 47
         parameters = [
-            {'epochs': 3, 'weight_decay': 0.01, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9}
+            {'epochs': 5, 'warmup_steps': 1, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9},
+            {'epochs': 3, 'warmup_steps': 0, 'learning_rate': 1e-5, 'adam_beta1': 0.9, 'adam_beta2': 0.9},
         ]
         for p in parameters:
             model = Albert(filename, p)
@@ -70,8 +75,10 @@ if __name__ == "__main__":
             time.append(t)
 
         # XLNet
+        # model 24, 18, 2
         parameters = [
-            {'epochs': 3, 'weight_decay': 0.01, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9}
+            {'epochs': 3, 'warmup_steps': 1, 'learning_rate': 1e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9},
+            {'epochs': 3, 'warmup_steps': 1, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.999},
         ]
         for p in parameters:
             model = XLNET(filename, p)
