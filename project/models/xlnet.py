@@ -7,7 +7,6 @@ import time
 from sklearn.metrics import accuracy_score
 import os
 import torch
-from datasets import load_metric
 import numpy as np
 
 torch.cuda.empty_cache()
@@ -83,7 +82,7 @@ class XLNET():
             model=model,                         # the instantiated Transformers model to be trained
             args=training_args,                  # training arguments, defined above
             train_dataset=dataset_train,         # training dataset
-            eval_dataset=dataset_test,          # evaluation dataset
+            # eval_dataset=dataset_test,          # evaluation dataset
             compute_metrics=self.compute_metrics,     # the callback that computes metrics of interest
         )
 
@@ -91,15 +90,14 @@ class XLNET():
 
         predictions = trainer.predict(dataset_test)
         preds = np.argmax(predictions.predictions, axis=-1)
-        metric = load_metric("glue", "mrpc")
-        res = metric.compute(predictions=preds, references=predictions.label_ids)
+        res = accuracy_score(predictions.label_ids, preds)
 
         end = time.time()
 
         # debug
         print('xlnet done')
         t = end - begin
-        return float("{0:.4f}".format(res['accuracy'])), float("{0:.4f}".format(t))
+        return float("{0:.4f}".format(res)), float("{0:.4f}".format(t))
 
 if __name__ == "__main__":
     path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/sarcasm.csv"

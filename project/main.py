@@ -1,8 +1,13 @@
 import pandas as pd
-from naive_bayes import NB
-from BERT import BERT
-from Albert import Albert
-from xlnet import XLNET
+# from naive_bayes import NB
+# from BERT import BERT
+# from Albert import Albert
+# from xlnet import XLNET
+
+from models.BERT import BERT
+from models.Albert import Albert
+from models.xlnet import XLNET
+from models.naive_bayes import NB
 
 from os import path
 import glob

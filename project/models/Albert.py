@@ -7,7 +7,6 @@ import time
 from sklearn.metrics import accuracy_score
 import os
 import torch
-from datasets import load_metric
 import numpy as np
 
 
@@ -85,7 +84,7 @@ class Albert():
             model=model,                         # the instantiated Transformers model to be trained
             args=training_args,                  # training arguments, defined above
             train_dataset=dataset_train,         # training dataset
-            eval_dataset=dataset_test,          # evaluation dataset
+            # eval_dataset=dataset_test,          # evaluation dataset
             compute_metrics=self.compute_metrics,     # the callback that computes metrics of interest
         )
 
@@ -95,18 +94,16 @@ class Albert():
 
         predictions = trainer.predict(dataset_test)
         preds = np.argmax(predictions.predictions, axis=-1)
-        metric = load_metric("glue", "mrpc")
-        res = metric.compute(predictions=preds, references=predictions.label_ids)
-
+        res = accuracy_score(predictions.label_ids, preds)
         # debug
         print('Albert done')
 
         t = end - begin
-        return float("{0:.4f}".format(res['accuracy'])), float("{0:.4f}".format(t))
+        return float("{0:.4f}".format(res)), float("{0:.4f}".format(t))
 
 if __name__ == "__main__":
-    path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/sarcasm.csv"
-    parameters = {'epochs': 3, 'weight_decay': 0.01, 'learning_rate': 2e-5, 'adam_beta1': 0.8, 'adam_beta2': 0.9}
+    path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/apple_twitter_sentiment.csv"
+    parameters = {'epochs': 5, 'warmup_steps': 0, 'learning_rate': 2e-5, 'adam_beta1': 0.9, 'adam_beta2': 0.999}
     albert = Albert(path, parameters)
     score, time = albert.pipeline()
     print("Accuracy:", score)
