@@ -34,15 +34,15 @@ class Albert():
         data = pd.read_csv(self.path)
         data = data.iloc[:,-2:]
         
-        if len(data) > 10000:
-            data = data[:10000]
+        if len(data) > 8000:
+            data = data[:8000]
 
         data.rename(columns = {list(data)[0]:'content', list(data)[1]:'label'}, inplace=True)
 
         data['content'] = data['content'].str.replace('\d+', '')
         data.dropna(inplace=True)
 
-        X_train, X_test = train_test_split(data, test_size=0.5, random_state=42)
+        X_train, X_test = train_test_split(data, test_size=0.35, random_state=42)
 
         le = preprocessing.LabelEncoder()
         le.fit(data.iloc[:,1])
@@ -52,7 +52,7 @@ class Albert():
         model_name = "albert-base-v2"
 
         # max sequence length for each document/sentence sample
-        max_length = 150
+        max_length = 120
 
         tokenizer = AlbertTokenizerFast.from_pretrained(model_name)
 
