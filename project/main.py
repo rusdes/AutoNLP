@@ -15,8 +15,11 @@ def initialize_df():
         scores = pd.DataFrame({ 'Dataset': pd.Series(dtype='str'),
                                 'NB': pd.Series(dtype='float'),
                                 'Bert_1': pd.Series(dtype='float'),
+                                'Bert_2': pd.Series(dtype='float'),
                                 'Albert_1': pd.Series(dtype='float'),
+                                'Albert_2': pd.Series(dtype='float'),
                                 'XLNet_1': pd.Series(dtype='float'),
+                                'XLNet_2': pd.Series(dtype='float'),
                                 })
 
     if path.exists('training_time.csv'):
@@ -25,8 +28,11 @@ def initialize_df():
         time = pd.DataFrame({'Dataset': pd.Series(dtype='str'),
                                 'NB': pd.Series(dtype='float'),
                                 'Bert_1': pd.Series(dtype='float'),
+                                'Bert_2': pd.Series(dtype='float'),
                                 'Albert_1': pd.Series(dtype='float'),
+                                'Albert_2': pd.Series(dtype='float'),
                                 'XLNet_1': pd.Series(dtype='float'),
+                                'XLNet_2': pd.Series(dtype='float'),
                                 })
     return scores, time
 
@@ -86,8 +92,8 @@ if __name__ == "__main__":
             score.append(a)
             time.append(t)
 
-        score_df = pd.DataFrame([score], columns = ["Dataset", "NB", "Bert_1", "Albert_1", "XLNet_1"])
-        time_df = pd.DataFrame([time], columns = ["Dataset", "NB", "Bert_1", "Albert_1", "XLNet_1"])
+        score_df = pd.DataFrame([score], columns = ["Dataset", "NB", "Bert_1", "Bert_2", "Albert_1", "Albert_2","XLNet_1", "XLNet_2"])
+        time_df = pd.DataFrame([time], columns = ["Dataset", "NB", "Bert_1", "Bert_2", "Albert_1", "Albert_2","XLNet_1", "XLNet_2"])
         scores = scores.append(score_df, ignore_index = True)
         times = times.append(time_df, ignore_index = True)
 
