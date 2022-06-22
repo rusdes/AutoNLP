@@ -30,7 +30,7 @@ class Albert():
         batch_size = 64
 
 
-        data = pd.read_csv(self.path)
+        data = pd.read_csv(self.path, engine='python')
         data = data.iloc[:,-2:]
         
         if len(data) > 8000:

@@ -13,7 +13,7 @@ class NB():
         self.path = path
 
     def pipeline(self):
-        data = pd.read_csv(self.path)
+        data = pd.read_csv(self.path, engine='python')
         data = data.iloc[:,-2:]
 
         if len(data) > 10000:
@@ -49,7 +49,7 @@ class NB():
         return float("{0:.4f}".format(np.mean(predicted == y_test))), float("{0:.4f}".format(t))
 
 if __name__ == "__main__":
-    path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/cyberbullying_tweets_1.csv"
+    path = "/home/rushil/Desktop/Coding/Synapse/AutoNLP/datasets/text_classification_dataset.csv"
     NB = NB(path)
     accuracy, time = NB.pipeline()
 
